@@ -11,6 +11,12 @@ app.get("/", (req, res) => {
 res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html')
 )});
 
+//probably going to want the read (get), delete, create (post), update (patch)
+
+
+
+
+//this only matters in a pre-prod environment
 app.listen(port, ()=>{
     console.log(`Example app listening at http://localhost:${port}`)
 })

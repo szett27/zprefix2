@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "repository": "https://github.com/szett27/ZPrefix2",
-  "private" : false,
+  "private": false,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
@@ -12,6 +12,9 @@
   "author": "Scott Zetterstrom",
   "license": "ISC",
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/material": "^5.11.4",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
