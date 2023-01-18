@@ -11,7 +11,25 @@ app.get("/", (req, res) => {
 res.sendFile(path.join(__dirname, 'frontend', 'build', 'index.html')
 )});
 
-//probably going to want the read (get), delete, create (post), update (patch)
+//create a user 
+app.post("/register", async(req, res)=>{
+    try{
+
+        const firstName = req.body.firstname;
+        const lastName = req.body.lastname;
+        const USER_NAME = req.body.user_name;
+        const hash =  await bcrypt.hash(req.body.password, 1);     
+
+        console.log(hash)
+
+        const newUser = await pool.query("INSERT INTO users (firstName, lastName, user_name, password) VALUES ($1, $2, $3, $4)", [firstName, lastName, USER_NAME, hash]);
+        res.json(newUser.rows)
+    } catch(err){
+        console.error(err.message)
+    }
+})
+
+
 
 
 

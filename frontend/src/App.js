@@ -4,7 +4,7 @@ import NASA from './NASA';
 import {useState} from 'react';
 function App() {
   const[login, setLogin] = useState(false)
-
+  console.log(`Login state ${login}`)
 
   return (
     <div className="App">
