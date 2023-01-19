@@ -1,15 +1,20 @@
 import './App.css';
 import Login from './Login';
-import NASA from './NASA';
+import Navbar from './Navbar'
 import {useState} from 'react';
+import Inventory from './Inventory';
+import CreateAccount from './CreateAccount';
 function App() {
-  const[login, setLogin] = useState(false)
-  console.log(`Login state ${login}`)
+  const[loginStatus, setLoginStatus] = useState(false)
+  const [auth, setAuth] = useState(false)
+  const [userid, setuserid] = useState(0)
+  const [createUser, setCreateUser] = useState(false)
 
+  console.log(`Login ${loginStatus}, Create User: ${createUser}`)
   return (
     <div className="App">
-    <h1>CRUD APP</h1>
-   {login ? <NASA /> : <Login login = {login} setLogin = {setLogin}/>}
+   <Navbar loginStatus = {loginStatus} setLoginStatus = {setLoginStatus} auth = {auth} userid = {userid}/>
+  {loginStatus ? <Login />: setCreateUser ? <CreateAccount/>: <Inventory userid = {userid}/>}
    </div>
   )
 }
