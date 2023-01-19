@@ -4,18 +4,25 @@ import Navbar from './Navbar'
 import {useState} from 'react';
 import Inventory from './Inventory';
 import CreateAccount from './CreateAccount';
+import { createTheme } from '@mui/system';
+import { ThemeProvider } from '@emotion/react';
+import {blue, pink} from '@mui/material/colors';
 function App() {
   const[loginStatus, setLoginStatus] = useState(false)
   const [auth, setAuth] = useState(false)
   const [userid, setuserid] = useState(0)
-  const [createUser, setCreateUser] = useState(false)
+  const [createAccount, setCreateAccount] = useState(false)
 
-  console.log(`Login ${loginStatus}, Create User: ${createUser}`)
-  return (
-    <div className="App">
-   <Navbar loginStatus = {loginStatus} setLoginStatus = {setLoginStatus} auth = {auth} userid = {userid}/>
-  {loginStatus ? <Login />: setCreateUser ? <CreateAccount/>: <Inventory userid = {userid}/>}
-   </div>
+
+
+  return(
+
+    <div>
+      <Navbar loginStatus = {loginStatus} setLoginStatus = {setLoginStatus} auth = {auth} userid = {userid}/>
+
+{loginStatus ? <Login /> : createAccount ? <CreateAccount /> : <Inventory auth = {auth} userid = {userid} /> }
+  </div>
+
   )
 }
 
