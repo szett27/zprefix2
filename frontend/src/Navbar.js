@@ -12,8 +12,6 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 export default function Navbar(props) {
   return (
-
-
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>

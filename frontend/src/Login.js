@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import CreateAccount from './CreateAccount';
 import { useState } from 'react';
+import { Typography } from '@mui/material';
 
 //if createUser is False, 
 
@@ -51,9 +52,9 @@ function Login(props){
 
    function authenticate(e){
     e.preventDefault();
+    console.log('Why am I not here?')
     const data = {"username": username, "password": password}
-    console.log(data)
-
+    
     fetch('/login', 
         {method: 'POST', 
          headers: {
@@ -78,6 +79,8 @@ function Login(props){
         <div id = 'login'>
             <h2>{props.login ? 'Logged In' : 'Not Logged In'}</h2>
             <form> 
+            <Typography>{username}</Typography>
+            <Typography>{password}</Typography>
             <TextField id="outlined-basic" label="Username" variant="outlined" onChange ={(e)=>setUserName(e.target.value)} />
             <TextField id="outlined-basic" label="Password" type = "password" variant="outlined" onChange = {(e)=>setPassword(e.target.value)} /><br />
             <Button type = 'submit' onSubmit={(e)=>authenticate(e)}>Submit</Button><Button onClick={()=>setCreateAccount(true)}>Create Account</Button>
