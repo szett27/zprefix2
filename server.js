@@ -5,7 +5,7 @@ const app = express();
 const Pool = require('pg').Pool;
 const bcrypt = require('bcryptjs');
 const { rejects } = require("assert");
-const port = process.env.PORT || 5001;
+const port = process.env.PORT || 5000;
 
 
 
@@ -42,6 +42,7 @@ app.post("/register", async(req, res)=>{
 //user login
 app.post("/login", async(req, res)=>{
     try{
+        console.log(req.body)
         const username = req.body.username;
         const password = req.body.password;
     

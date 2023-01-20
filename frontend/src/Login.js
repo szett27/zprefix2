@@ -50,8 +50,9 @@ function Login(props){
    const [password, setPassword] = useState('')
 
    function authenticate(e){
-    e.preventDefault()
+    e.preventDefault();
     const data = {"username": username, "password": password}
+    console.log(data)
 
     fetch('/login', 
         {method: 'POST', 
@@ -70,16 +71,16 @@ function Login(props){
    }
 
    if(createAccount){
-    return (<CreateAccount accountState = {setCreateAccount} login = {props.setLogin}/>) 
+    return (<CreateAccount accountState = {setCreateAccount} login = {props.setLoginStatus}/>) 
    } 
 
     return(
         <div id = 'login'>
             <h2>{props.login ? 'Logged In' : 'Not Logged In'}</h2>
-            <form onSubmit={()=>window.alert('Submitted')}> 
-            <TextField id="outlined-basic" label="Username" variant="outlined" onChange ={()=>setUserName(e.target.value)} />
-            <TextField id="outlined-basic" label="Password" variant="outlined" onChange = {()=>setPassword(e.target.value)} /><br />
-            <Button type = 'submit' onSubmit={(e)=>props.authenticate(e)}>Submit</Button><Button onClick={()=>setCreateAccount(true)}>Create Account</Button>
+            <form> 
+            <TextField id="outlined-basic" label="Username" variant="outlined" onChange ={(e)=>setUserName(e.target.value)} />
+            <TextField id="outlined-basic" label="Password" type = "password" variant="outlined" onChange = {(e)=>setPassword(e.target.value)} /><br />
+            <Button type = 'submit' onSubmit={(e)=>authenticate(e)}>Submit</Button><Button onClick={()=>setCreateAccount(true)}>Create Account</Button>
             </form>
           
        
