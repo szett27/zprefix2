@@ -4,6 +4,7 @@ import Navbar from './Navbar'
 import {useState} from 'react';
 import Inventory from './Inventory';
 import CreateAccount from './CreateAccount';
+import CreateItem from './CreateItem';
 import { createTheme } from '@mui/system';
 import { ThemeProvider } from '@emotion/react';
 import {blue, pink} from '@mui/material/colors';
@@ -22,7 +23,7 @@ function App() {
 
 {loginStatus ? <Login loginStatus = {loginStatus} setCreateAccount = {setCreateAccount} setLoginStatus = {setLoginStatus} setAuth = {setAuth} auth = {auth} user = {user} setUser = {setUser}/> : 
 createAccount ? <CreateAccount setAuth = {setAuth} setUser = {setUser} setCreateAccount = {setCreateAccount} loginStatus = {setLoginStatus}/>
-: 
+: auth && createItem ? <CreateItem user = {user} /> :
 <Inventory auth = {auth} user = {user} /> }
   </div>
 
