@@ -11,18 +11,15 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 
 export default function Navbar(props) {
-    console.log(props)
-
   return (
 
 
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          </Typography>
-       {!props.loginStatus ?<><Button type = "submit" onClick={()=>props.setLoginStatus(true)}>Login</Button></> :
-        props.auth ? <><Typography>Hello User Name Goes Here</Typography><Button>Logout</Button></> : <></>}
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>Inventory Management</Typography>
+        {props.auth ?  <><Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>Hello User Name Goes Here</Typography><Button color ="inherit">My Inventory</Button><Button color = "inherit" onClick={()=>props.setAuth(false)}>Logout</Button></>: <></>}
+        {!props.auth ?<><Button color = "inherit" type = "submit" onClick={()=>props.setLoginStatus(true)}>Login</Button></> :<></>}
         </Toolbar>
       </AppBar>
     </Box>
