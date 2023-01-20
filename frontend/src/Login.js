@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import CreateAccount from './CreateAccount';
 import { useState } from 'react';
-import { Typography } from '@mui/material';
+import { Typography, Grid } from '@mui/material';
 
 //if createUser is False, 
 
@@ -79,12 +79,21 @@ function Login(props){
 
     return(
         <div id = 'login'>
-            <h2>{props.auth ? 'Logged In' : 'Not Logged In'}</h2>
+            <Grid
+             container
+            spacing={0}
+            direction="column"
+            alignItems="center"
+            justifyContent="center"
+         style={{ minHeight: '100vh' }}>
+            <Grid item xs={3}>
             <form className='form'> 
             <TextField id="outlined-basic" label="Username" variant="outlined" onChange ={(e)=>setUserName(e.target.value)} />
             <TextField id="outlined-basic" label="Password" type = "password" variant="outlined" onChange = {(e)=>setPassword(e.target.value)} /><br />
             <Button type = 'submit' onClick={(e)=>authenticate(e)}>Submit</Button><Button onClick={()=>setCreateAccount(true)}>Create Account</Button>
             </form>
+            </Grid>
+            </Grid>
           
        
         </div>

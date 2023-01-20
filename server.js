@@ -11,7 +11,7 @@ const port = process.env.PORT || 5000;
 
 //using express to serve react build
 app.use(express.static(path.join(__dirname, 'frontend', 'build')))
-
+app.use(cors())
 
 //connect server to database
 const pool = new Pool({
@@ -42,7 +42,6 @@ app.post("/register", async(req, res)=>{
 //user login
 app.post("/login", async(req, res)=>{
     try{
-       
         const username = req.body.username;
         const password = req.body.password;
     
