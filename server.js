@@ -70,10 +70,10 @@ app.get("/inventory", async(req, res)=>{
 app.post("/item", async(req, res)=>{
     try{
         
-        const item_name = req.body.item_name;
-        const description = req.body.description;
-        const quantity = req.body.quantity;
-        const user_id = req.body.user_id;
+        const item_name = req.body.itemName;
+        const description = req.body.itemDescription;
+        const quantity = req.body.itemQuantity;
+        const user_id = req.body.userid;
         
        
 
