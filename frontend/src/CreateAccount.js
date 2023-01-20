@@ -3,7 +3,7 @@ import { useState} from "react";
 import { TextField, Button } from "@mui/material";
 
 
-function CreateAccount(props){
+export default function CreateAccount(props){
         const [userName, setUserName] = useState('');
         const [password, setPassword] = useState('');
         const [firstName, setfirstName] = useState('');
@@ -20,8 +20,10 @@ function CreateAccount(props){
           body: JSON.stringify(data)})
         .then(res=>res.json())
         .then(window.alert(`Welcome ${firstName + lastName} to the Inventory Management System`))
+        .then(props.setUser(userName))
         .then(props.setCreateAccount(false))
-        .then(props.setAuth(false))
+        .then(props.setAuth(true))
+     
         }
     //need to enfore types and validate data
     return(
@@ -41,5 +43,3 @@ function CreateAccount(props){
 
 
 }
-
-export default CreateAccount
