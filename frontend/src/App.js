@@ -10,7 +10,7 @@ import {blue, pink} from '@mui/material/colors';
 function App() {
   const[loginStatus, setLoginStatus] = useState(false)
   const [auth, setAuth] = useState(false)
-  const [userid, setuserid] = useState(0)
+  const [user, setUser] = useState(0)
   const [createAccount, setCreateAccount] = useState(false)
 
 
@@ -18,9 +18,9 @@ function App() {
   return(
 
     <div>
-      <Navbar loginStatus = {loginStatus} setLoginStatus = {setLoginStatus} auth = {auth} userid = {userid}/>
+      <Navbar loginStatus = {loginStatus} setLoginStatus = {setLoginStatus} setAuth = {setAuth} auth = {auth} user = {user}/>
 
-{loginStatus ? <Login /> : createAccount ? <CreateAccount /> : <Inventory auth = {auth} userid = {userid} /> }
+{loginStatus ? <Login loginStatus = {loginStatus} setLoginStatus = {setLoginStatus} setAuth = {setAuth} auth = {auth} user = {user} setUser = {setUser}/> : createAccount ? <CreateAccount /> : <Inventory auth = {auth} user = {user} /> }
   </div>
 
   )

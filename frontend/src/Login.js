@@ -50,25 +50,27 @@ function Login(props){
    const [username, setUserName] = useState('')
    const [password, setPassword] = useState('')
 
-   function authenticate(e){
+   const authenticate = async (e)=>{
     e.preventDefault();
-    console.log('Why am I not here?')
     const data = {"username": username, "password": password}
     
-    fetch('/login', 
+    const response =await fetch('/login', 
         {method: 'POST', 
          headers: {
         'Content-Type': 'application/json',
       }, 
       body: JSON.stringify(data)})
-    .then(res=>res.json())
-    .then(bool=>{
+    const authData = await response.json()
+   
+    if(authData){
         props.setLoginStatus(false)
-        props.setauth(true)
+        props.setAuth(true)
         props.setUser(username)
         window.alert('Login Success!')
     }
-    )
+    else{
+        window.alert('Invalid Username or Password')
+    }
    }
 
    if(createAccount){
@@ -77,13 +79,11 @@ function Login(props){
 
     return(
         <div id = 'login'>
-            <h2>{props.login ? 'Logged In' : 'Not Logged In'}</h2>
-            <form> 
-            <Typography>{username}</Typography>
-            <Typography>{password}</Typography>
+            <h2>{props.auth ? 'Logged In' : 'Not Logged In'}</h2>
+            <form className='form'> 
             <TextField id="outlined-basic" label="Username" variant="outlined" onChange ={(e)=>setUserName(e.target.value)} />
             <TextField id="outlined-basic" label="Password" type = "password" variant="outlined" onChange = {(e)=>setPassword(e.target.value)} /><br />
-            <Button type = 'submit' onSubmit={(e)=>authenticate(e)}>Submit</Button><Button onClick={()=>setCreateAccount(true)}>Create Account</Button>
+            <Button type = 'submit' onClick={(e)=>authenticate(e)}>Submit</Button><Button onClick={()=>setCreateAccount(true)}>Create Account</Button>
             </form>
           
        
