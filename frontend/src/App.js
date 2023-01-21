@@ -5,13 +5,12 @@ import {useState} from 'react';
 import Inventory from './Inventory';
 import CreateAccount from './CreateAccount';
 import CreateItem from './CreateItem';
-import { createTheme } from '@mui/system';
-import { ThemeProvider } from '@emotion/react';
-import {blue, pink} from '@mui/material/colors';
+
 function App() {
   const[loginStatus, setLoginStatus] = useState(false)
+  const [createItem, setCreateItem] = useState(false)
   const [auth, setAuth] = useState(false)
-  const [user, setUser] = useState(0)
+  const [user, setUser] = useState('  ')
   const [createAccount, setCreateAccount] = useState(false)
 
 
@@ -19,11 +18,11 @@ function App() {
   return(
 
     <div>
-      <Navbar loginStatus = {loginStatus} setLoginStatus = {setLoginStatus} setAuth = {setAuth} auth = {auth} user = {user}/>
+      <Navbar setCreateItem = {setCreateItem} setCreateAccount = {setCreateAccount} loginStatus = {loginStatus} setLoginStatus = {setLoginStatus} setAuth = {setAuth} auth = {auth} user = {user}/>
 
 {loginStatus ? <Login loginStatus = {loginStatus} setCreateAccount = {setCreateAccount} setLoginStatus = {setLoginStatus} setAuth = {setAuth} auth = {auth} user = {user} setUser = {setUser}/> : 
 createAccount ? <CreateAccount setAuth = {setAuth} setUser = {setUser} setCreateAccount = {setCreateAccount} loginStatus = {setLoginStatus}/>
-: auth && createItem ? <CreateItem user = {user} /> :
+: auth && createItem ? <CreateItem setCreateItem = {setCreateItem} user = {user} /> :
 <Inventory auth = {auth} user = {user} /> }
   </div>
 

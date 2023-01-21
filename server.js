@@ -47,10 +47,13 @@ app.post("/login", async(req, res)=>{
     
         const hash =  await pool.query("SELECT password FROM users WHERE user_name = $1", [username]);
         let hashed = hash.rows[0].password
+        
+
 
         if(hashed){
             const validPassword = await bcrypt.compare(password, hashed)
-            res.json(validPassword)
+            const id = await pool.query("SELECT user_id FROM users WHERE user_name = $1", [username]);
+            res.json({"valid": validPassword, "id": id.rows[0].user_id})
         }
     } catch(err){
         console.error(err.message)
@@ -73,11 +76,8 @@ app.post("/item", async(req, res)=>{
         const item_name = req.body.itemName;
         const description = req.body.itemDescription;
         const quantity = req.body.itemQuantity;
-        const user_id = req.body.userid;
-        
-       
-
-        const newUser = await pool.query("INSERT INTO inventory (item_name, description, quantity, user_id) VALUES ($1, $2, $3, $4)", [item_name, description, quantity, user_id]);
+        const user_id = req.body.user_id;
+        const newItem = await pool.query("INSERT INTO inventory (item_name, description, quantity, user_id) VALUES ($1, $2, $3, $4)", [item_name, description, quantity, user_id]);
         console.log(req.body)
     } catch(err){
         console.error(err.message)
