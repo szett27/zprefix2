@@ -4,13 +4,12 @@ import {Button, Card, CardContent, Typography, Stack, Switch} from '@mui/materia
 
 export default function Item(props){
 
-
     const [item_name, setItem_Name] = useState(props.item.name)
     const [description, setDescription] = useState(props.item.description)
     const [quantity, setQuantity] = useState(props.item.quantity)
     const [item_id, setItem_id] = useState(props.item.id)
     const [edit, setEdit] = useState(false)
-
+    console.log(props.item)
     return(
        <div>
         <Card>
