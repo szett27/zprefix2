@@ -15,26 +15,21 @@ useEffect(()=>{
   .then((response) => response.json())
   .then((data) => setInventory([...inventory, data]))
   .then(()=>setInventoryLoaded(true));
-}, [])
+}, [inventory])
 
-console.log(InventoryLoaded)
-
+// inventory.map(item=>{
+//     return(
+//     console.log(item.user_id)
+//     )
+// })
 
 if(InventoryLoaded){
     return(
   <div>
-  <Typography variant = "h4">Inventory</Typography>
-    {/* {item ? <Item item = {item} setItem = {setItem} auth ={props.auth} user ={props.user}/> :
-     props.myInventory ? inventory.filter(item=>(item.id===props.user)).map((item, key)=>{
-        return(
-            <Item id={key} item = {item} setItem = {setItem} auth ={props.auth} user ={props.userID}/>
-        )
-     }) :  */}
-     {inventory[0].map((item, key)=>{ return(<Item id={key} item = {item} setItem = {setItem} auth ={props.auth} user ={props.userID}/>)})}
-  </div>
-) } 
-
-
+  <Button onClick = {()=>props.setMyInventory(false)}><Typography variant = "h4">Inventory</Typography></Button>
+    {inventory[0].map((item, key)=>{return(props.myInventory && item.user_id === props.user ? <Item id={key} item = {item} setItem = {setItem} auth ={props.auth} user ={props.user}/>: <Item id={key} item = {item} setItem = {setItem} auth ={props.auth} user ={props.user}/>)})}
+     </div>
+    )}
 else{
 
 return (

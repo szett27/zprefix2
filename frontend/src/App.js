@@ -12,18 +12,19 @@ function App() {
   const [auth, setAuth] = useState(false)
   const [user, setUser] = useState('  ')
   const [createAccount, setCreateAccount] = useState(false)
+  const [myInventory, setMyInventory] = useState(false)
 
 
 
   return(
 
     <div>
-      <Navbar setCreateItem = {setCreateItem} setCreateAccount = {setCreateAccount} loginStatus = {loginStatus} setLoginStatus = {setLoginStatus} setAuth = {setAuth} auth = {auth} user = {user}/>
+      <Navbar setMyInventory = {setMyInventory} setCreateItem = {setCreateItem} setCreateAccount = {setCreateAccount} loginStatus = {loginStatus} setLoginStatus = {setLoginStatus} setAuth = {setAuth} auth = {auth} user = {user}/>
 
 {loginStatus ? <Login loginStatus = {loginStatus} setCreateAccount = {setCreateAccount} setLoginStatus = {setLoginStatus} setAuth = {setAuth} auth = {auth} user = {user} setUser = {setUser}/> : 
 createAccount ? <CreateAccount setAuth = {setAuth} setUser = {setUser} setCreateAccount = {setCreateAccount} loginStatus = {setLoginStatus}/>
 : auth && createItem ? <CreateItem setCreateItem = {setCreateItem} user = {user} /> :
-<Inventory auth = {auth} user = {user} /> }
+<Inventory auth = {auth} user = {user} myInventory = {myInventory} setMyInventory= {setMyInventory}/>}
   </div>
 
   )

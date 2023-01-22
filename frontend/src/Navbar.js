@@ -15,8 +15,8 @@ export default function Navbar(props) {
       <AppBar position="static">
         <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>Inventory Management</Typography>
-        {props.auth ?  <><Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>Hello {props.user}</Typography><Button color ="inherit">My Inventory</Button>
-        <Button color ="inherit">My Inventory</Button><Button color = "inherit" onClick={()=>props.setCreateItem(true)}>Add Item</Button><Button color = "inherit" onClick={()=>props.setAuth(false)}>Logout</Button></>: <></>}
+        {props.auth ?  <><Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>Hello {props.user}</Typography>
+        <Button color ="inherit" onClick={()=>props.setMyInventory(true)}>My Inventory</Button><Button color = "inherit" onClick={()=>props.setCreateItem(true)}>Add Item</Button><Button color = "inherit" onClick={()=>props.setAuth(false)}>Logout</Button></>: <></>}
         {!props.auth ?<><Button color = "inherit" type = "submit" onClick={()=>props.setLoginStatus(true)}>Login</Button></> :<></>}
         </Toolbar>
       </AppBar>
