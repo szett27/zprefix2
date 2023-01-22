@@ -8,7 +8,7 @@ export default function Item(props){
     const [item_name, setItem_Name] = useState(props.item.item_name)
     const [description, setDescription] = useState(props.item.description)
     const [quantity, setQuantity] = useState(props.item.quantity)
-    const [item_id, setItem_id] = useState(props.item.id)
+    const [item_id, setItem_id] = useState(props.item.item_id)
     const [edit, setEdit] = useState("true")
 
     console.log(props.item)
@@ -16,9 +16,10 @@ export default function Item(props){
     function deleteItem(e){
         let id = item_id;
         e.preventDefault();
-        fetch(`http://localhost:5000/${id}`, 
+        fetch(`http://localhost:5000/delete/${id}`, 
         { method: 'DELETE' })
-        .then(() => window.alert(`${item_name} deleted`));
+        .then(() => window.alert(`${item_name} deleted`)
+        .then(()=>setItem_Name ('deleted')));
     }
    
     function EditChange(){
