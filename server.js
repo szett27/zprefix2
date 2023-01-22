@@ -87,12 +87,11 @@ app.post("/item", async(req, res)=>{
 //update an item's properties
 app.patch("/item", async(req, res)=>{
     try{
-        const item_name = req.body.item_name;
-        const description = req.body.description;
-        const quantity = req.body.quantity;
+        console.log(req.body)
+        const item_name = req.body.itemName;
+        const description = req.body.itemDescription;
+        const quantity = req.body.itemQuantity;
         const item_id = req.body.item_id;
-            //look at body and see what's updated and not update
-        console.log(description)
         const updateItem = await pool.query("UPDATE inventory SET item_name = $2, description = $3,  quantity =$4 WHERE item_id = $1", [item_id, item_name, description, quantity])
         console.log(updateItem.rows)
     } catch(err){

@@ -10,7 +10,7 @@ function App() {
   const[loginStatus, setLoginStatus] = useState(false)
   const [createItem, setCreateItem] = useState(false)
   const [auth, setAuth] = useState(false)
-  const [user, setUser] = useState('  ')
+  const [user, setUser] = useState(null)
   const [createAccount, setCreateAccount] = useState(false)
   const [myInventory, setMyInventory] = useState(false)
 

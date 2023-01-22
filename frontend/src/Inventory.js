@@ -27,7 +27,9 @@ if(InventoryLoaded){
     return(
   <div>
   <Button onClick = {()=>props.setMyInventory(false)}><Typography variant = "h4">Inventory</Typography></Button>
-    {inventory[0].map((item, key)=>{return(props.myInventory && item.user_id === props.user ? <Item id={key} item = {item} setItem = {setItem} auth ={props.auth} user ={props.user}/>: <Item id={key} item = {item} setItem = {setItem} auth ={props.auth} user ={props.user}/>)})}
+    {inventory[0].map((item, key)=>{return(props.myInventory && item.user_id === props.user ? 
+    <Item id={key} item = {item} setItem = {setItem} auth ={props.auth} user ={props.user}/>: 
+    <Item id={key} item = {item} setItem = {setItem} auth ={props.auth} user ={props.user}/>)})}
      </div>
     )}
 else{

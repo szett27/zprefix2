@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, forceUpdate } from "react"
 import {Button, Card, CardContent, Typography, Stack, Switch, FormControlLabel} from '@mui/material'
 import React from 'react';
 
@@ -9,9 +9,8 @@ export default function Item(props){
     const [description, setDescription] = useState(props.item.description)
     const [quantity, setQuantity] = useState(props.item.quantity)
     const [item_id, setItem_id] = useState(props.item.item_id)
-    const [edit, setEdit] = useState("true")
+    const [edit, setEdit] = useState("false")
 
-    console.log(props.item)
     //delete item
     function deleteItem(e){
         let id = item_id;
@@ -19,33 +18,50 @@ export default function Item(props){
         fetch(`http://localhost:5000/delete/${id}`, 
         { method: 'DELETE' })
         .then(() => window.alert(`${item_name} deleted`)
-        .then(()=>setItem_Name ('deleted')));
+        .then(()=>forceUpdate()));
     }
    
-    function EditChange(){
+    function EditChange(e){
+        e.preventDefault()
         setEdit(!edit)
     }
-   // console.log(props.item.user_id === props.user && props.auth)// ? setEdit('true') : setEdit('false');
+
+    function UpdateItem(e){
+            e.preventDefault();
+            const data = {"itemName": item_name, "itemQuantity": quantity, "itemDescription": description, "item_id": item_id}
+            fetch('http://localhost:5000/item', 
+            {method: 'PATCH', 
+             headers: {
+            'Content-Type': 'application/json',
+          }, 
+          body: JSON.stringify(data)})
+        .then(res=>res.json())
+        .then(window.alert(`${item_name} updated!`))
+        .then(()=>forceUpdate())
+        }
+
+
     
       return (
         <div contentEditable = {edit}>
         <Card >
           <CardContent>
           {props.auth ? <FormControlLabel
-      control={<Switch onChange = {()=>EditChange()} name="checked" />}
+      control={<Switch onChange = {(e)=>EditChange(e)} name="checked" />}
       label="Edit"
     /> : <></>}
           {/* <Switch label = "edit"></Switch> */}
-          <Typography value = "itemName" variant="h5" onChange ={(e)=>setItem_Name(e.target.value)} component="h2">
-              {item_name}
+          <p>{item_name}</p>
+          <Typography value = "itemName" variant="h5"  component="h2">
+            {edit ? <form><input onChange ={(e)=>setItem_Name(e.target.value)} value = {item_name} /></form> :  {item_name}}
             </Typography>
-            <Typography value = "quantity" variant="h5" component="h2">
+            <Typography value = "quantity" variant="h5" component="h2" onChange={(e)=>setQuantity(e.target.value)}>
               Quantity: {quantity}
             </Typography>
-            <Typography value = "description" variant="body2" component="p">
-              Description: {description}
+            <Typography value = "description" variant="body2" component="p" onChange={(e)=>setDescription(e.target.value)}>
+            {description}
             </Typography>
-            <Button onClick = {(e)=>deleteItem(e)}>Delete Item</Button>
+           {edit ? <div><Button color = "inherit" onClick = {(e)=>deleteItem(e)}>Delete Item</Button> <Button color = "inherit" onClick = {(e)=>UpdateItem(e)}>Update Item</Button></div> : <></>}
           </CardContent>
         </Card>
         </div>
