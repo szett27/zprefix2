@@ -15,15 +15,15 @@ function App() {
   const [myInventory, setMyInventory] = useState(false)
 
 
-
+  console.log(`MyInventory is ${myInventory}`)
   return(
 
     <div>
       <Navbar setMyInventory = {setMyInventory} setCreateItem = {setCreateItem} setCreateAccount = {setCreateAccount} loginStatus = {loginStatus} setLoginStatus = {setLoginStatus} setAuth = {setAuth} auth = {auth} user = {user}/>
 
-{loginStatus ? <Login loginStatus = {loginStatus} setCreateAccount = {setCreateAccount} setLoginStatus = {setLoginStatus} setAuth = {setAuth} auth = {auth} user = {user} setUser = {setUser}/> : 
+{loginStatus ? <Login loginStatus = {loginStatus} setMyInventory = {setMyInventory} setCreateAccount = {setCreateAccount} setLoginStatus = {setLoginStatus} setAuth = {setAuth} auth = {auth} user = {user} setUser = {setUser}/> : 
 createAccount ? <CreateAccount setAuth = {setAuth} setUser = {setUser} setCreateAccount = {setCreateAccount} loginStatus = {setLoginStatus}/>
-: auth && createItem ? <CreateItem setCreateItem = {setCreateItem} user = {user} /> :
+: auth && createItem ? <CreateItem setCreateItem = {setCreateItem} setMyInventory = {setMyInventory} user = {user} /> :
 <Inventory auth = {auth} user = {user} myInventory = {myInventory} setMyInventory= {setMyInventory}/>}
   </div>
 

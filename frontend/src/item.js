@@ -1,5 +1,5 @@
-import { useState, forceUpdate } from "react"
-import {Button, Card, CardContent, Typography, Stack, Switch, FormControlLabel} from '@mui/material'
+import { useState, forceUpdate, suppressContentEditableWarning } from "react"
+import {Button, Card, CardContent, Typography, Switch, FormControlLabel} from '@mui/material'
 import React from 'react';
 
 
@@ -9,7 +9,7 @@ export default function Item(props){
     const [description, setDescription] = useState(props.item.description)
     const [quantity, setQuantity] = useState(props.item.quantity)
     const [item_id, setItem_id] = useState(props.item.item_id)
-    const [edit, setEdit] = useState("false")
+    const [edit, setEdit] = useState(false)
 
     //delete item
     function deleteItem(e){
@@ -41,10 +41,9 @@ export default function Item(props){
         }
 
         let authEdit = (props.auth && edit);
-
-    console.log(authEdit, props.item.user_id)
+       
       return (
-        <div contentEditable = {edit}>
+        <div contentEditable = {edit}  suppressContentEditableWarning={true}>
         <Card >
           <CardContent>
           {authEdit ? <FormControlLabel

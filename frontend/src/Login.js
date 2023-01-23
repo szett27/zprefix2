@@ -21,12 +21,12 @@ function Login(props){
       }, 
       body: JSON.stringify(data)})
     const authData = await response.json()
-      console.log(authData.id)
    let id  = [authData.id]
     if(authData.valid){
         props.setLoginStatus(false)
         props.setAuth(true)
         props.setUser(id[0])
+        props.setMyInventory(true)
         window.alert('Login Success!')
     }
     else{

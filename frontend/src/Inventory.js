@@ -1,6 +1,5 @@
 import {useState, useEffect} from 'react';
-import { Button, Typography } from '@mui/material';
-import {Card} from '@mui/material'
+import { Button, ListItemSecondaryAction, Typography } from '@mui/material';
 import Item from './item'
 
 export default function Inventory(props){
@@ -23,15 +22,31 @@ useEffect(()=>{
 //     )
 // })
 
+ 
 if(InventoryLoaded){
-    return(
+  console.log(inventory[0])
+  console.log(props.user, props.myInventory)
+  console.log(inventory[0].map(item=>{
+    console.log(item.user_id)
+  }))
+let x = inventory[0].filter(item=>item.user_id === props.user)
+console.log(x.length)
+
+return( 
   <div>
-  <Button onClick = {()=>props.setMyInventory(false)}><Typography variant = "h4">Inventory</Typography></Button>
-    {inventory[0].map((item, key)=>{return(props.myInventory && item.user_id === props.user ? 
-    <Item id={key} item = {item} setItem = {setItem} auth ={props.auth} user ={props.user}/>: 
-    <Item id={key} item = {item} setItem = {setItem} auth ={props.auth} user ={props.user}/>)})}
-     </div>
-    )}
+ <Button onClick = {()=>props.setMyInventory(false)}><Typography variant = "h4">Full Inventory</Typography></Button>
+ {props.myInventory ? <Typography>User {props.user} 's Inventory</Typography>:<></>}
+    {props.myInventory ? inventory[0].filter(item=>item.user_id === props.user).map((item, key)=>{
+      {console.log('I am an item')}
+        return (<Item id={key} item = {item} setItem = {setItem} auth ={props.auth} user ={props.user}/>)
+    }) : 
+    inventory[0].map((key, item)=>{
+      return(<Item id={key} item = {item} setItem = {setItem} auth ={props.auth} user ={props.user}/>)
+
+    })
+      }
+     </div>)
+}
 else{
 
 return (

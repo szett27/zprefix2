@@ -8,12 +8,10 @@ export default function CreateItem(props){
     const [itemName, setItemName] = useState('');
     const[itemQuantity, setItemQuantity] =useState(0)
     const[itemDescription, setItemDescription] = useState('')
-    console.log(props.user)
 
     function addItem(e){
         e.preventDefault();
         const data = {"itemName": itemName, "itemQuantity": itemQuantity, "itemDescription": itemDescription, "user_id": props.user}
-        e.preventDefault();
         fetch('http://localhost:5000/item', 
         {method: 'POST', 
          headers: {
@@ -23,6 +21,7 @@ export default function CreateItem(props){
     .then(res=>res.json())
     .then(window.alert(`${itemName} added to system`))
     .then(props.setCreateItem(false))
+    .then(props.setMyInventory(true))
     }
     
     return(
