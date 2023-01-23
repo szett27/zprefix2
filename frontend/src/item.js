@@ -21,10 +21,10 @@ export default function Item(props){
         .then(()=>forceUpdate()));
     }
    
-    function EditChange(e){
-        e.preventDefault()
-        setEdit(!edit)
-    }
+    // function EditChange(e){
+    //     e.preventDefault()
+    //     setEdit(!edit)
+    // }
 
     function UpdateItem(e){
             e.preventDefault();
@@ -40,28 +40,28 @@ export default function Item(props){
         .then(()=>forceUpdate())
         }
 
+        let authEdit = (props.auth && edit);
 
-    
+    console.log(authEdit, props.item.user_id)
       return (
         <div contentEditable = {edit}>
         <Card >
           <CardContent>
-          {props.auth ? <FormControlLabel
-      control={<Switch onChange = {(e)=>EditChange(e)} name="checked" />}
+          {authEdit ? <FormControlLabel
+      control={<Switch  onChange = {()=>setEdit(!edit)} name="checked" />}
       label="Edit"
     /> : <></>}
           {/* <Switch label = "edit"></Switch> */}
-          <p>{item_name}</p>
-          <Typography value = "itemName" variant="h5"  component="h2">
-            {edit ? <form><input onChange ={(e)=>setItem_Name(e.target.value)} value = {item_name} /></form> :  {item_name}}
-            </Typography>
+          
+            {(authEdit) ? <form><input onChange ={(e)=>setItem_Name(e.target.value)} value = {item_name} /></form> :  <Typography value = "itemName" variant="h5"  component="h2">{item_name} </Typography>}
+         
             <Typography value = "quantity" variant="h5" component="h2" onChange={(e)=>setQuantity(e.target.value)}>
-              Quantity: {quantity}
+            {(authEdit) ? <form><input onChange ={(e)=>setQuantity(e.target.value)} value = {quantity} /></form>: `Quantity: ${quantity}`}
             </Typography>
             <Typography value = "description" variant="body2" component="p" onChange={(e)=>setDescription(e.target.value)}>
-            {description}
+            {(authEdit) ? <form><input onChange ={(e)=>setDescription(e.target.value)} value = {description} /></form>: description}
             </Typography>
-           {edit ? <div><Button color = "inherit" onClick = {(e)=>deleteItem(e)}>Delete Item</Button> <Button color = "inherit" onClick = {(e)=>UpdateItem(e)}>Update Item</Button></div> : <></>}
+           {(authEdit) ? <div><Button color = "inherit" onClick = {(e)=>deleteItem(e)}>Delete Item</Button> <Button color = "inherit" onClick = {(e)=>UpdateItem(e)}>Update Item</Button></div> : <></>}
           </CardContent>
         </Card>
         </div>
