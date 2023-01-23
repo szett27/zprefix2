@@ -5,7 +5,7 @@ import Item from './item'
 export default function Inventory(props){
 
 const [inventory, setInventory] =useState([]);
-const [item, setItem] = useState(false);
+const [singleItem, setSingleItem] = useState([]);
 const [newItem, setNewItem] = useState(false);
 const [InventoryLoaded, setInventoryLoaded] = useState(false);
 
@@ -16,32 +16,26 @@ useEffect(()=>{
   .then(()=>setInventoryLoaded(true));
 }, [inventory])
 
-// inventory.map(item=>{
-//     return(
-//     console.log(item.user_id)
-//     )
-// })
 
- 
-if(InventoryLoaded){
-  console.log(inventory[0])
-  console.log(props.user, props.myInventory)
-  console.log(inventory[0].map(item=>{
-    console.log(item.user_id)
-  }))
-let x = inventory[0].filter(item=>item.user_id === props.user)
-console.log(x.length)
 
+if(InventoryLoaded && (singleItem.length > 0)){
+  return(
+    <div>
+      <Item item = {singleItem} setSingleItem = {setSingleItem} auth ={props.auth} user ={props.user}/>
+      <Button onClick = {()=>setSingleItem([...singleItem, []])}>Full Inventory</Button>
+    </div>  
+  )
+}
+ else if(InventoryLoaded){
 return( 
   <div>
  <Button onClick = {()=>props.setMyInventory(false)}><Typography variant = "h4">Full Inventory</Typography></Button>
  {props.myInventory ? <Typography>User {props.user} 's Inventory</Typography>:<></>}
-    {props.myInventory ? inventory[0].filter(item=>item.user_id === props.user).map((item, key)=>{
-      {console.log('I am an item')}
-        return (<Item id={key} item = {item} setItem = {setItem} auth ={props.auth} user ={props.user}/>)
+ {props.myInventory ? inventory[0].filter(item=>item.user_id === props.user).map((item, key)=>{
+        return (<Item setSingleItem = {setSingleItem} id={key} item = {item} auth ={props.auth} user ={props.user}/>)
     }) : 
-    inventory[0].map((key, item)=>{
-      return(<Item id={key} item = {item} setItem = {setItem} auth ={props.auth} user ={props.user}/>)
+    inventory[0].map((item, key)=>{
+      return(<Item id={key} setSingleItem = {setSingleItem} item = {item}  auth ={props.auth} user ={props.user}/>)
 
     })
       }

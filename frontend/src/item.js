@@ -37,16 +37,16 @@ export default function Item(props){
           body: JSON.stringify(data)})
         .then(res=>res.json())
         .then(window.alert(`${item_name} updated!`))
-        .then(()=>forceUpdate())
+        .then(()=>setEdit(false))
         }
 
         let authEdit = (props.auth && edit);
        
       return (
-        <div contentEditable = {edit}  suppressContentEditableWarning={true}>
+        <div contentEditable = {edit}  suppressContentEditableWarning={true} onClick = {()=>props.setSingleItem(props.item)}>
         <Card >
           <CardContent>
-          {authEdit ? <FormControlLabel
+          {props.auth ? <FormControlLabel
       control={<Switch  onChange = {()=>setEdit(!edit)} name="checked" />}
       label="Edit"
     /> : <></>}
