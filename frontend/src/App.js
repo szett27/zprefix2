@@ -26,8 +26,7 @@ function App() {
 {loginStatus ? <Login loginStatus = {loginStatus} setMyInventory = {setMyInventory} setCreateAccount = {setCreateAccount} setLoginStatus = {setLoginStatus} setAuth = {setAuth} auth = {auth} user = {user} setUser = {setUser}/> : 
 createAccount ? <CreateAccount setAuth = {setAuth} setUser = {setUser} setCreateAccount = {setCreateAccount} loginStatus = {setLoginStatus}/>
 : auth && createItem ? <CreateItem setCreateItem = {setCreateItem} setMyInventory = {setMyInventory} user = {user} /> :
-singleItem ? <Item item = {singleItem} singleItem = {singleItem} setSingleItem = {setSingleItem} auth ={auth} user ={user}/>
-:<Inventory setSingleItem ={setSingleItem} auth = {auth} user = {user} myInventory = {myInventory} setMyInventory= {setMyInventory}/>}
+<Inventory setSingleItem ={setSingleItem} auth = {auth} user = {user} myInventory = {myInventory} setMyInventory= {setMyInventory}/>}
   </div>
 
   )

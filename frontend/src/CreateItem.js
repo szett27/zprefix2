@@ -12,7 +12,7 @@ export default function CreateItem(props){
     function addItem(e){
         e.preventDefault();
         const data = {"itemName": itemName, "itemQuantity": itemQuantity, "itemDescription": itemDescription, "user_id": props.user}
-        fetch('http://localhost:5000/item', 
+        fetch('/item', 
         {method: 'POST', 
          headers: {
         'Content-Type': 'application/json',
