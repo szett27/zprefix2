@@ -15,7 +15,7 @@ useEffect(()=>{
   .then((response) => response.json())
   .then((data) => setInventory([...inventory, data]))
   .then(()=>setInventoryLoaded(true));
-}, [inventory])
+})
 
 
 if(InventoryLoaded){
