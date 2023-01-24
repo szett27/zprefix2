@@ -65,7 +65,7 @@ export default function Item(props){
 
          
             {authEdit ? <form><input onChange ={(e)=>setDescription(e.target.value)} value = {description} /></form> :   
-                expanded ? <Typography value = "description" variant="body2" component="p" onChange={(e)=>setDescription(e.target.value)}>{description}</Typography> :  <div><Typography value = "description" variant="body2" component="p" onChange={(e)=>setDescription(e.target.value)}>{description.slice(0,100)}</Typography>
+                expanded ? <Typography value = "description" variant="body2" component="p" onChange={(e)=>setDescription(e.target.value)}>{description}</Typography> :  <div><Typography value = "description" variant="body2" component="p" onChange={(e)=>setDescription(e.target.value)}>{description}</Typography>
                 <Button onClick={() => setExpanded(!expanded)}>...</Button></div>}
  
            {(authEdit) ? <div><Button color = "inherit" onClick = {(e)=>deleteItem(e)}>Delete Item</Button> <Button color = "inherit" onClick = {(e)=>UpdateItem(e)}>Update Item</Button></div> : <></>}
