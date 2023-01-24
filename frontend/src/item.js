@@ -9,16 +9,18 @@ export default function Item(props){
     const [description, setDescription] = useState(props.item.description)
     const [quantity, setQuantity] = useState(props.item.quantity)
     const [item_id, setItem_id] = useState(props.item.item_id)
+    const [userId, setUserID] = useState(props.item.user_id)
     const [edit, setEdit] = useState(false)
+    const [expanded, setExpanded] = useState(false);
 
+    console.log(props.singleItem)
     //delete item
     function deleteItem(e){
         let id = item_id;
         e.preventDefault();
-        fetch(`http://localhost:5000/delete/${id}`, 
+        fetch(`/delete/${id}`, 
         { method: 'DELETE' })
-        .then(() => window.alert(`${item_name} deleted`)
-        .then(()=>forceUpdate()));
+        .then(() => window.alert(`${item_name} deleted`))
     }
    
     // function EditChange(e){
@@ -29,7 +31,7 @@ export default function Item(props){
     function UpdateItem(e){
             e.preventDefault();
             const data = {"itemName": item_name, "itemQuantity": quantity, "itemDescription": description, "item_id": item_id}
-            fetch('http://localhost:5000/item', 
+            fetch('/item', 
             {method: 'PATCH', 
              headers: {
             'Content-Type': 'application/json',
@@ -40,13 +42,14 @@ export default function Item(props){
         .then(()=>setEdit(false))
         }
 
+        let canEdit = (props.user === userId);
         let authEdit = (props.auth && edit);
-       
+       console.log(canEdit)
       return (
         <div contentEditable = {edit}  suppressContentEditableWarning={true} onClick = {()=>props.setSingleItem(props.item)}>
         <Card >
           <CardContent>
-          {props.auth ? <FormControlLabel
+          {props.auth & canEdit ? <FormControlLabel
       control={<Switch  onChange = {()=>setEdit(!edit)} name="checked" />}
       label="Edit"
     /> : <></>}
@@ -57,9 +60,14 @@ export default function Item(props){
             <Typography value = "quantity" variant="h5" component="h2" onChange={(e)=>setQuantity(e.target.value)}>
             {(authEdit) ? <form><input onChange ={(e)=>setQuantity(e.target.value)} value = {quantity} /></form>: `Quantity: ${quantity}`}
             </Typography>
-            <Typography value = "description" variant="body2" component="p" onChange={(e)=>setDescription(e.target.value)}>
-            {(authEdit) ? <form><input onChange ={(e)=>setDescription(e.target.value)} value = {description} /></form>: description}
-            </Typography>
+
+
+
+         
+            {authEdit ? <form><input onChange ={(e)=>setDescription(e.target.value)} value = {description} /></form> :   
+                expanded ? <Typography value = "description" variant="body2" component="p" onChange={(e)=>setDescription(e.target.value)}>{description}</Typography> :  <div><Typography value = "description" variant="body2" component="p" onChange={(e)=>setDescription(e.target.value)}>{description.slice(0,100)}</Typography>
+                <Button onClick={() => setExpanded(!expanded)}>...</Button></div>}
+ 
            {(authEdit) ? <div><Button color = "inherit" onClick = {(e)=>deleteItem(e)}>Delete Item</Button> <Button color = "inherit" onClick = {(e)=>UpdateItem(e)}>Update Item</Button></div> : <></>}
           </CardContent>
         </Card>

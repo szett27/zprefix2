@@ -6,12 +6,20 @@ const Pool = require('pg').Pool;
 const bcrypt = require('bcryptjs');
 const { rejects } = require("assert");
 const port = process.env.PORT || 5000;
+const session = require('express-session')
 
-
+const crypto = require('crypto')
+let sessionHash = crypto.createHash('md5').update('some_string').digest("hex")
 
 //using express to serve react build
 app.use(express.static(path.join(__dirname, 'frontend', 'build')))
 app.use(cors())
+
+app.use(session({
+    secret: sessionHash,
+    resave: false,
+    saveUninitialized: false
+}))
 
 //connect server to database
 const pool = new Pool({
@@ -54,6 +62,9 @@ app.post("/login", async(req, res)=>{
             const validPassword = await bcrypt.compare(password, hashed)
             const id = await pool.query("SELECT user_id FROM users WHERE user_name = $1", [username]);
             res.json({"valid": validPassword, "id": id.rows[0].user_id})
+            if(validPassword){
+                req.session.isAuth = true;
+            }
         }
     } catch(err){
         console.error(err.message)

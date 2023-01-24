@@ -6,29 +6,31 @@ export default function Inventory(props){
 
 const [inventory, setInventory] =useState([]);
 const [singleItem, setSingleItem] = useState([]);
-const [newItem, setNewItem] = useState(false);
 const [InventoryLoaded, setInventoryLoaded] = useState(false);
 
+console.log(singleItem)
+
 useEffect(()=>{
-  fetch('http://localhost:5000/inventory')
+  fetch('/inventory')
   .then((response) => response.json())
   .then((data) => setInventory([...inventory, data]))
   .then(()=>setInventoryLoaded(true));
 }, [inventory])
 
-
-
+//put single item into focus
 if(InventoryLoaded && (singleItem.length > 0)){
   return(
     <div>
-      <Item item = {singleItem} setSingleItem = {setSingleItem} auth ={props.auth} user ={props.user}/>
+      <Item item = {singleItem} singleItem = {singleItem} setSingleItem = {setSingleItem} auth ={props.auth} user ={props.user}/>
       <Button onClick = {()=>setSingleItem([...singleItem, []])}>Full Inventory</Button>
     </div>  
   )
 }
+//full inventory
  else if(InventoryLoaded){
 return( 
   <div>
+
  <Button onClick = {()=>props.setMyInventory(false)}><Typography variant = "h4">Full Inventory</Typography></Button>
  {props.myInventory ? <Typography>User {props.user} 's Inventory</Typography>:<></>}
  {props.myInventory ? inventory[0].filter(item=>item.user_id === props.user).map((item, key)=>{
@@ -41,8 +43,9 @@ return(
       }
      </div>)
 }
-else{
 
+//wiaiting for inventory to load
+else{
 return (
     <div>
         <h1>Inventory Loading...</h1>

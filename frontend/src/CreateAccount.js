@@ -12,7 +12,7 @@ export default function CreateAccount(props){
     function makeUser(e){
             e.preventDefault();
             const data = {"firstname": firstName, "lastname": lastName, "user_name": userName, "password": password}
-            fetch('http://localhost:5000/register', 
+            fetch('/register', 
             {method: 'POST', 
              headers: {
             'Content-Type': 'application/json',
