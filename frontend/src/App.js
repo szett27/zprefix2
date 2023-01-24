@@ -3,6 +3,7 @@ import Login from './Login';
 import Navbar from './Navbar'
 import {useState} from 'react';
 import Inventory from './Inventory';
+import Item from './item';
 import CreateAccount from './CreateAccount';
 import CreateItem from './CreateItem';
 
@@ -13,6 +14,7 @@ function App() {
   const [user, setUser] = useState(null)
   const [createAccount, setCreateAccount] = useState(false)
   const [myInventory, setMyInventory] = useState(false)
+  const [singleItem, setSingleItem] = useState([])
 
 
 
@@ -24,7 +26,8 @@ function App() {
 {loginStatus ? <Login loginStatus = {loginStatus} setMyInventory = {setMyInventory} setCreateAccount = {setCreateAccount} setLoginStatus = {setLoginStatus} setAuth = {setAuth} auth = {auth} user = {user} setUser = {setUser}/> : 
 createAccount ? <CreateAccount setAuth = {setAuth} setUser = {setUser} setCreateAccount = {setCreateAccount} loginStatus = {setLoginStatus}/>
 : auth && createItem ? <CreateItem setCreateItem = {setCreateItem} setMyInventory = {setMyInventory} user = {user} /> :
-<Inventory auth = {auth} user = {user} myInventory = {myInventory} setMyInventory= {setMyInventory}/>}
+singleItem ? <Item item = {singleItem} singleItem = {singleItem} setSingleItem = {setSingleItem} auth ={auth} user ={user}/>
+:<Inventory setSingleItem ={setSingleItem} auth = {auth} user = {user} myInventory = {myInventory} setMyInventory= {setMyInventory}/>}
   </div>
 
   )
