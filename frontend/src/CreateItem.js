@@ -33,7 +33,7 @@ export default function CreateItem(props){
                 <TextField id="outlined-basic" label="Item Name" variant="outlined" value = {itemName} onChange={(e)=>setItemName(e.target.value)} /><br></br>
                 <TextField id="outlined-basic" label="Item Quantity" variant="outlined" value = {itemQuantity} onChange = {(e)=>setItemQuantity(e.target.value)}/><br></br>
                 <TextField id="outlined-basic" label="Item Description" variant="outlined" value = {itemDescription} onChange={(e)=>setItemDescription(e.target.value)}/><br></br>
-                <Button type = "submit">Add Item</Button>
+                <Button type = "submit">Add Item</Button><Button onClick = {()=>props.setCreateItem(false)}>Back to Inventory</Button>
                 </form>
                 </Box>
             </div>

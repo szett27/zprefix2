@@ -54,7 +54,9 @@ function Login(props){
             <Typography variant='h5' align = "center">Login</Typography>
             <TextField id="outlined-basic" label="Username" variant="outlined" onChange ={(e)=>setUserName(e.target.value)} />
             <TextField id="outlined-basic" label="Password" type = "password" variant="outlined" onChange = {(e)=>setPassword(e.target.value)} /><br />
-            <div align = "center"><Button type = 'submit' onClick={(e)=>authenticate(e)}>Submit</Button><Button onClick={(e)=>displayCreate(e)}>Create Account</Button></div>
+            <div align = "center"><Button type = 'submit' onClick={(e)=>authenticate(e)}>Submit</Button><Button onClick={(e)=>displayCreate(e)}>Create Account</Button>
+            <Button onClick={()=>props.setCreateAccount(false)}>Back to Full Inventory</Button>
+            </div>
             </form>
             </Grid>
             </Grid>
