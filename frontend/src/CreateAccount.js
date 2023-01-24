@@ -34,7 +34,7 @@ export default function CreateAccount(props){
             <TextField id="outlined-basic" label="Password" type = "password" variant="outlined" value = {password} onChange = {(e)=>setPassword(e.target.value)}/><br></br>
             <TextField id="outlined-basic" label="First Name" variant="outlined" value = {firstName} onChange={(e)=>setfirstName(e.target.value)}/><br></br>
             <TextField id="outlined-basic" label="Last Name" variant="outlined" value = {lastName} onChange={(e)=>setlastName(e.target.value)}/><br></br>
-            <Button type = "submit">Create User</Button>
+            <Button type = "submit">Create User</Button><Button onClick ={()=>props.setCreateAccount(false)}>Back to Inventory</Button>
             </form>
         </div>
 
