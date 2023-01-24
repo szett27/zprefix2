@@ -4,9 +4,7 @@ const path = require("path");
 const app = express();
 const Pool = require('pg').Pool;
 const bcrypt = require('bcryptjs');
-const { rejects } = require("assert");
 const port = process.env.PORT || 5000;
-const session = require('express-session')
 
 const crypto = require('crypto')
 let sessionHash = crypto.createHash('md5').update('some_string').digest("hex")
@@ -15,11 +13,7 @@ let sessionHash = crypto.createHash('md5').update('some_string').digest("hex")
 app.use(express.static(path.join(__dirname, 'frontend', 'build')))
 app.use(cors())
 
-app.use(session({
-    secret: sessionHash,
-    resave: false,
-    saveUninitialized: false
-}))
+
 
 //connect server to database
 const pool = new Pool({
