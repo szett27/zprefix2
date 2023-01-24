@@ -15,7 +15,7 @@ function App() {
   const [myInventory, setMyInventory] = useState(false)
 
 
-  console.log(`MyInventory is ${myInventory}`)
+
   return(
 
     <div>

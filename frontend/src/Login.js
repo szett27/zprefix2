@@ -40,6 +40,12 @@ function Login(props){
         props.setCreateAccount(true)
     }
 
+    function resetToInventory(e){
+        e.preventDefault()
+        props.setCreateAccount(false);
+        props.setLoginStatus(false)
+    }
+
     return(
         <div id = 'login'>
             <Grid
@@ -55,7 +61,7 @@ function Login(props){
             <TextField id="outlined-basic" label="Username" variant="outlined" onChange ={(e)=>setUserName(e.target.value)} />
             <TextField id="outlined-basic" label="Password" type = "password" variant="outlined" onChange = {(e)=>setPassword(e.target.value)} /><br />
             <div align = "center"><Button type = 'submit' onClick={(e)=>authenticate(e)}>Submit</Button><Button onClick={(e)=>displayCreate(e)}>Create Account</Button>
-            <Button onClick={()=>props.setCreateAccount(false)}>Back to Full Inventory</Button>
+            <Button onClick={(e)=>resetToInventory(e)}>Back to Full Inventory</Button>
             </div>
             </form>
             </Grid>
